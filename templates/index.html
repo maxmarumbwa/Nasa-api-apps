@@ -71,7 +71,7 @@
         // 3. Add the NASA GIBS VIIRS NDVI WMS Layer
         // Using the layer name you found: VIIRS_SNPP_NDVI_8Day
         const gibsWmsLayer = L.tileLayer.wms('https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?', {
-            layers: 'MERRA2_Air_Temperature_250hPa_Monthly', // The NDVI layer
+            layers: 'MODIS_Aqua_Thermal_Anomalies_All', // The NDVI layer
             format: 'image/png',
             transparent: true,
             version: '1.3.0',

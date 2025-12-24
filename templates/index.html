@@ -4,89 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIIRS NDVI Viewer with Leaflet</title>
-    <!-- Leaflet CSS -->
+    <!-- Leaflet CSS (External CDN) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-        }
-        #map {
-            height: 100vh;
-            width: 100vw;
-        }
-        #info {
-            position: absolute;
-            top: 10px;
-            left: 50px;
-            background: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            font-size: 14px;
-        }
-#legend {
-    position: absolute;
-    bottom: 30px; /* Positions it near the bottom */
-    right: 10px;  /* Positions it near the right edge */
-    z-index: 1000; /* Ensures it sits above the map */
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-    max-width: 500px; /* Adjust as needed for your legend image */
-}
-
-#legend img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-    </style>
+    <!-- Your Custom CSS (Now served from Flask static folder) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div id="info">
         <strong>NASA GIBS: AIR Temperature</strong>
     </div>
+    
     <!-- Legend Container -->
     <div id="legend">
-        <img src="https://gibs.earthdata.nasa.gov/legends/MERRA2_Air_Temperature_250hPa_Monthly_H.png" alt="NDVI Color Legend">
+        <img src="https://gibs.earthdata.nasa.gov/legends/MERRA2_Air_Temperature_250hPa_Monthly_H.png" alt="Temperature Legend">
     </div> 
+    
     <div id="map"></div>
 
-    <!-- Leaflet JS -->
+    <!-- Leaflet JS (External CDN) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        // 1. Initialize the map, centered on the world
-        const map = L.map('map').setView([20, 0], 2);
-
-        // 2. Add a base map (OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-
-        // 3. Add the NASA GIBS VIIRS NDVI WMS Layer
-        // Using the layer name you found: VIIRS_SNPP_NDVI_8Day
-        const gibsWmsLayer = L.tileLayer.wms('https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?', {
-            layers: 'MODIS_Aqua_Thermal_Anomalies_All', // The NDVI layer
-            format: 'image/png',
-            transparent: true,
-            version: '1.3.0',
-            attribution: 'NASA GIBS',
-            opacity: 0.7 // Adjust opacity to blend with base map
-        }).addTo(map);
-
-        // 4. (Optional) Add a simple layer control
-        L.control.layers({
-            'Base Map': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-        }, {
-            'VIIRS NDVI': gibsWmsLayer
-        }, {
-            collapsed: false
-        }).addTo(map);
-    </script>
+    <!-- Your Custom JavaScript (Now served from Flask static folder) -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

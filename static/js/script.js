@@ -1,5 +1,5 @@
 // 1. Initialize the map, centered on the world
-const map = L.map('map').setView([20, 0], 2);
+const map = L.map('map').setView([-18.7, 29.5], 7);
 
 // 2. Add a base map (OpenStreetMap)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -27,4 +27,9 @@ L.control.layers({
 }).addTo(map);
 fetch('static/data/zim_admin1.geojson')
     .then(r => r.json())
-    .then(data => L.geoJSON(data).addTo(map));
+    .then(data => L.geoJSON(data, {
+        style: {color: '#63ff33ff', weight: 2, fillOpacity: 0.1},
+        onEachFeature: (f, l) => {
+            if(f.properties.ADM1_EN) l.bindPopup(f.properties.ADM1_EN);
+        }
+    }).addTo(map));

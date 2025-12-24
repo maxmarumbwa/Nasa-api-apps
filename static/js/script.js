@@ -25,11 +25,19 @@ L.control.layers({
 }, {
     collapsed: false
 }).addTo(map);
+
+
+let geojsonLayer;
 fetch('static/data/zim_admin1.geojson')
     .then(r => r.json())
-    .then(data => L.geoJSON(data, {
-        style: {color: '#63ff33ff', weight: 2, fillOpacity: 0.1},
-        onEachFeature: (f, l) => {
-            if(f.properties.ADM1_EN) l.bindPopup(f.properties.ADM1_EN);
-        }
-    }).addTo(map));
+    .then(data => {
+        geojsonLayer = L.geoJSON(data, {
+            style: {color: '#FF5733', weight: 2, fillOpacity: 0.1},
+            onEachFeature: (f, l) => {
+                if(f.properties.ADM1_EN) l.bindPopup(f.properties.ADM1_EN);
+                l.on('mouseover', () => l.setStyle({weight: 4, fillOpacity: 0.3}));
+                l.on('mouseout', () => l.setStyle({weight: 2, fillOpacity: 0.1}));
+            }
+        }).addTo(map);
+        map.fitBounds(geojsonLayer.getBounds());
+    });

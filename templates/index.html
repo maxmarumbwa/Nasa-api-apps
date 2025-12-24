@@ -27,11 +27,29 @@
             z-index: 1000;
             font-size: 14px;
         }
+#legend {
+    position: absolute;
+    bottom: 30px; /* Positions it near the bottom */
+    right: 10px;  /* Positions it near the right edge */
+    z-index: 1000; /* Ensures it sits above the map */
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    max-width: 500px; /* Adjust as needed for your legend image */
+}
+
+#legend img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
     </style>
 </head>
 <body>
     <div id="info">
-        <strong>NASA GIBS: VIIRS SNPP NDVI (8-Day)</strong>
+        <strong>NASA GIBS: AIR Temperature</strong>
     </div>
     <!-- Legend Container -->
     <div id="legend">

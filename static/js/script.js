@@ -25,3 +25,6 @@ L.control.layers({
 }, {
     collapsed: false
 }).addTo(map);
+fetch('static/data/zim_admin1.geojson')
+    .then(r => r.json())
+    .then(data => L.geoJSON(data).addTo(map));
